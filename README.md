@@ -1,2 +1,2 @@
 # OCR_SnippingTool
- Extract text using the Snipping Tool to the clipboard.
+ Extract text using the Snipping Tool into the clipboard.
