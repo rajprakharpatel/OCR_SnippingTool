@@ -41,10 +41,10 @@ class SnipWidget(QtWidgets.QWidget):
     def mouseReleaseEvent(self, mouseEvent: QtGui.QMouseEvent):
         self.close()
         # storing snip dimension coordinates
-        x1 = self.start.x()
-        y1 = self.start.y()
-        x2 = self.finish.x()
-        y2 = self.finish.y()
+        x1 = min(self.start.x(), self.finish.x())
+        y1 = min(self.start.y(), self.finish.y())
+        x2 = max(self.start.x(), self.finish.x())
+        y2 = max(self.start.y(), self.finish.y())
 
         if x1 == x2 or y1 == y2:
             exit(1)

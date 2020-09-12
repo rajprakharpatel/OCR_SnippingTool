@@ -1,13 +1,14 @@
 import sys
 
-import tess_env_setup
+# import tess_env_setup
 from PyQt5 import QtWidgets
 from Snip_Ocr import Image_OCR
 from Snip_Ocr import Snipper
 
 
 def main(*args, **kwargs):
-    tess_env_setup.main()
+    # tess_env_setup.main()
+
     # Capturing Screenshot
     app = QtWidgets.QApplication(sys.argv)
     size = app.primaryScreen().size()
