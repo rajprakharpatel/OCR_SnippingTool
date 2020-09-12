@@ -1,24 +1,25 @@
 import sys
 
-import cv2
-from Image_OCR import ImageOcr
+import tess_env_setup
 from PyQt5 import QtWidgets
-from Snipper import SnipWidget
+from Snip_Ocr import Image_OCR
+from Snip_Ocr import Snipper
 
 
 def main(*args, **kwargs):
+    tess_env_setup.main()
     # Capturing Screenshot
     app = QtWidgets.QApplication(sys.argv)
     size = app.primaryScreen().size()
-    snip = SnipWidget(size.width(), size.height())
+    snip = Snipper.SnipWidget(size.width(), size.height())
     snip.show()
     app.aboutToQuit.connect(app.deleteLater)
-    cv2.destroyAllWindows()
     app.exec_()
     image = snip.get_image()
 
     # Detecting Text
-    img_ocr = ImageOcr(image)
+    img_ocr = Image_OCR.ImageOcr(image)
+    img_ocr.to_clipboard()
     print(img_ocr.txt)
     sys.exit()
 

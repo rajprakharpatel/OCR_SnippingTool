@@ -52,9 +52,9 @@ class SnipWidget(QtWidgets.QWidget):
         SnipWidget.image = ImageGrab.grab(bbox=(x1, y1, x2, y2))
         SnipWidget.image.save('capture.png')
         SnipWidget.image = cv2.cvtColor(np.array(SnipWidget.image), cv2.COLOR_BGR2RGB)
-        cv2.imshow('Captured Image', SnipWidget.image)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
+        # cv2.imshow('Captured Image', SnipWidget.image)
+        # cv2.waitKey(0)
+        # cv2.destroyAllWindows()
 
     @classmethod
     def get_image(cls):

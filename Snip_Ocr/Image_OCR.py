@@ -31,9 +31,9 @@ class ImageOcr:
         if de_skew:
             self.image = self.de_skew()
 
-        cv2.imshow('processed img', self.image)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
+        # cv2.imshow('processed img', self.image)
+        # cv2.waitKey(0)
+        # cv2.destroyAllWindows()
         self.txt = self.get_text()
 
     def invert(self):
