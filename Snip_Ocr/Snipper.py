@@ -11,7 +11,7 @@ class SnipWidget(QtWidgets.QWidget):
 
     def __init__(self, scr_w, scr_h):
         super().__init__()
-        self.setGeometry(0, 0, scr_w, scr_h)
+        # self.setGeometry(0, 0, scr_w, scr_h)
         self.setWindowTitle(' ')
         self.start = QtCore.QPoint()
         self.finish = QtCore.QPoint()
@@ -19,9 +19,15 @@ class SnipWidget(QtWidgets.QWidget):
         QtWidgets.QApplication.setOverrideCursor(
             QtGui.QCursor(QtCore.Qt.CrossCursor)
         )
-        self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
-        print('Capture the screen...')
+        self.setWindowFlags(QtCore.Qt.FramelessWindowHint |
+                            QtCore.Qt.X11BypassWindowManagerHint)
+
+        # print('Capture the screen...')
+        # self.showFullScreen()
+        allScreens = QtWidgets.QApplication.desktop().geometry()
+        self.setGeometry(allScreens)
         self.show()
+        # print(allScreens)
 
     def paintEvent(self, paintEvent: QtGui.QPaintEvent) -> None:
         qp = QtGui.QPainter(self)
@@ -51,7 +57,8 @@ class SnipWidget(QtWidgets.QWidget):
 
         SnipWidget.image = ImageGrab.grab(bbox=(x1, y1, x2, y2))
         SnipWidget.image.save('capture.png')
-        SnipWidget.image = cv2.cvtColor(np.array(SnipWidget.image), cv2.COLOR_BGR2RGB)
+        SnipWidget.image = cv2.cvtColor(
+            np.array(SnipWidget.image), cv2.COLOR_BGR2RGB)
         # cv2.imshow('Captured Image', SnipWidget.image)
         # cv2.waitKey(0)
         # cv2.destroyAllWindows()

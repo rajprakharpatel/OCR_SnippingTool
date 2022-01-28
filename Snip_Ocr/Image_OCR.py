@@ -83,7 +83,8 @@ class ImageOcr:
         (h, w) = self.image.shape[:2]
         center = (w // 2, h // 2)
         M = cv2.getRotationMatrix2D(center, angle, 1.0)
-        rotated = cv2.warpAffine(self.image, M, (w, h), flags=cv2.INTER_CUBIC, borderMode=cv2.BORDER_REPLICATE)
+        rotated = cv2.warpAffine(self.image, M, (w, h), flags=cv2.INTER_CUBIC,
+                                 borderMode=cv2.BORDER_REPLICATE)
         return rotated
 
     # template matching
@@ -96,7 +97,11 @@ class ImageOcr:
 
     def to_clipboard(self):
         if sys.platform == 'win32' or sys.platform == 'cygwin' or sys.platform == 'win64':
-            subprocess.Popen(['clip'], encoding='utf8', stdin=subprocess.PIPE).communicate(self.txt)
+            subprocess.Popen(['clip'], encoding='utf8',
+                             stdin=subprocess.PIPE).communicate(self.txt)
+        elif sys.platform == 'linux':
+            subprocess.Popen(['xclip'], encoding='utf8',
+                             stdin=subprocess.PIPE).communicate(self.txt)
         else:
             raise Exception('Platform not supported')
 
